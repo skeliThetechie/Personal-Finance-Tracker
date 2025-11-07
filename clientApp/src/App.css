@@ -1,38 +1,114 @@
+/* === Theme Variables === */
+:root {
+  --primary: #2a9b95  ;
+  --secondary: #a9a9a9 ;
+  --background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+  --text-color: #2d2d2d;
+  --text-light: #ffffff;
+  --card-bg: rgba(255, 255, 255, 0.25);
+  --border-radius: 16px;
+  --shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  --blur: blur(10px);
+  --transition: all 0.3s ease;
+}
+
+/* === Page Layout === */
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  background: var(--background);
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+  transition: var(--transition);
+}
+
+/* === Card Container === */
+.login-card {
+  background: var(--card-bg);
+  box-shadow: var(--shadow);
+  backdrop-filter: var(--blur);
+  border-radius: var(--border-radius);
+  padding: 3rem 2.5rem;
+  width: 100%;
+  max-width: 420px;
+  color: var(--text-color);
+  transition: var(--transition);
+}
+
+.login-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* === Title (No Glow) === */
+.App-logo {
+  display: none; /* Hide the old spinning logo */
+}
+
+.App-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: var(--primary);
+  letter-spacing: 0.5px;
+}
+
+/* === Form Fields === */
+.MuiTextField-root {
+  width: 100%;
+  margin-bottom: 1.2rem;
+}
+
+.MuiOutlinedInput-root {
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: var(--border-radius);
+  transition: var(--transition);
+}
+
+.MuiOutlinedInput-root.Mui-focused fieldset {
+  border-color: var(--primary);
+}
+
+/* === Submit Button === */
+input[type="submit"],
+button[type="submit"] {
+  width: 100%;
+  padding: 0.8rem;
+  border: none;
+  border-radius: var(--border-radius);
+  background: var(--primary);
+  color: var(--text-light);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+input[type="submit"]:hover,
+button[type="submit"]:hover {
+  background: var(--secondary);
+  transform: scale(1.02);
+}
+
+/* === Toastify Styling === */
+.Toastify__toast--success {
+  background: var(--primary);
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.Toastify__toast--error {
+  background: var(--secondary);
+  color: white;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* === Responsive === */
+@media (max-width: 480px) {
+  .login-card {
+    padding: 2rem 1.5rem;
   }
-  to {
-    transform: rotate(360deg);
+
+  .App-title {
+    font-size: 1.5rem;
   }
 }
