@@ -1,19 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import Login from './pages/Login';
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import "./App.css";
+import Login from "./pages/Login";
+import TransactionsForm from "./pages/Transactions/TransactionsForm";
+import Dashboard from "./pages/Dashboard";
+import Header from "./components/Header";
 
 function App() {
-  return (
-    <div className="App">
-      <div className="login-card">
-        <h1 className="App-title">Personal Finance Tracker</h1>
-          <ToastContainer position="top-center" autoClose={2000} />
-          <Login/>
-      </div>
-    </div>
-  );
+  const location = useLocation();
+  const hideHeader = location.pathname === "/deez";
+    return (
+        <>
+            {!hideHeader && <Header />}
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/add-transaction" element={<TransactionsForm />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Routes>
+        </>
+    );
 }
 
 export default App;

@@ -3,7 +3,8 @@
     "",
     "\\clientApp",
     "\\clientApp\\public",
-    "\\clientApp\\src"
+    "\\clientApp\\src",
+    "\\clientApp\\src\\pages"
   ],
   "SelectedNode": "\\clientApp",
   "PreviewInSolutionExplorer": false

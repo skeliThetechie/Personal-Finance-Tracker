@@ -1,7 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { TextField, Grid } from "@mui/material";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
     const {
@@ -25,10 +26,11 @@ const Login = () => {
         toast.success("Successfully Logged In!");
     };
 
-    console.log("Username: ", watch("username"));
-    console.log("Password: ", watch("password"));
-
     return (
+        <div className="App">
+      <div className="login-card">
+        <h1 className="App-title">Personal Finance Tracker</h1>
+          <ToastContainer position="top-center" autoClose={2000} />
         <form onSubmit={handleSubmit(onSubmit)}>
             <Grid container spacing={1}>
                 <Grid size={{ xs: 12 }}>
@@ -69,6 +71,8 @@ const Login = () => {
                 </Grid>
             </Grid>
         </form>
+        </div>
+        </div>
     );
 };
 
