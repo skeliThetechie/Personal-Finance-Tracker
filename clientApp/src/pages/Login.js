@@ -1,10 +1,13 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { TextField, Grid } from "@mui/material";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+    const navigate = useNavigate();
+
     const {
         register,
         handleSubmit,
@@ -33,7 +36,7 @@ const Login = () => {
                 toast.success("Successfully Logged In!");
                 localStorage.setItem("loggedInUser", JSON.stringify(user));
                 setTimeout(() => {
-                window.location.href = "/dashboard"; // Redirect to Dashboard page
+                navigate("/dashboard"); // Redirect to Dashboard page
                 }, 1000);
             } else {
                 toast.error("Invalid username or password");
@@ -48,7 +51,6 @@ const Login = () => {
         <div className="App">
             <div className="login-card">
                 <h1 className="App-title">Personal Finance Tracker</h1>
-                <ToastContainer position="top-center" autoClose={2000} />
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <Grid container spacing={1}>
                         <Grid size={{ xs: 12 }}>

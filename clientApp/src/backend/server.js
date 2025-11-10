@@ -26,6 +26,7 @@ app.get("/api/categories", async (req, res) => {
   res.json(categories);
 });
 
+// Get transactions for a specific user
 app.get("/api/transactions/user/:userId", async (req, res) => {
   const db = await dbPromise;
   const { userId } = req.params;
@@ -46,23 +47,21 @@ app.get("/api/transactions/user/:userId", async (req, res) => {
   }
 });
 
+// Add Transactions
 app.post("/api/transactions/add", async (req, res) => {
   const db = await dbPromise;
   const { userId, description, amount, category, date } = req.body;
 
-  // Input validation
   if (!userId || !amount || !category || !date) {
     return res.status(400).json({ error: "Missing required fields" });
   }
 
   try {
-    // Get CategoryId (create if not exists)
     let categoryRow = await db.get("SELECT CategoryId FROM Categories WHERE Name = ?", [category]);
     if (!categoryRow) {
-      return res.status(400).json({ error: "Invalid category ID" });
+      return res.status(400).json({ error: `Category '${category}' does not exist.` });
     }
 
-    // Insert transaction
     await db.run(
       `INSERT INTO Transactions (UserId, Description, Amount, CategoryId, Date)
        VALUES (?, ?, ?, ?, ?)`,
@@ -76,6 +75,36 @@ app.post("/api/transactions/add", async (req, res) => {
   }
 });
 
+// Get summary for a specific user
+app.get("/api/transactions/summary/:userId", async (req, res) => {
+  const db = await dbPromise;
+  const { userId } = req.params;
+
+  try {
+    const transactions = await db.all(
+      `SELECT t.Amount, c.Name AS CategoryName
+       FROM Transactions t
+       LEFT JOIN Categories c ON t.CategoryId = c.CategoryId
+       WHERE t.UserId = ?`,
+      [userId]
+    );
+
+    const totalIncome = transactions
+      .filter(t => t.CategoryName === "Income")
+      .reduce((sum, t) => sum + t.Amount, 0);
+
+    const totalExpenses = transactions
+      .filter(t => t.CategoryName !== "Income")
+      .reduce((sum, t) => sum + t.Amount, 0);
+
+    const netBalance = totalIncome - totalExpenses;
+
+    res.json({ totalIncome, totalExpenses, netBalance });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: err.message });
+  }
+});
 
 app.get("/", (req, res) => {
   res.send("Server is running!");

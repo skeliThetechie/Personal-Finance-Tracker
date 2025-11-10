@@ -1,8 +1,14 @@
 import React from 'react'
+import TransactionsView from './Transactions/TransactionsView'
+import SummaryView from './Summary/SummaryView'
 
-const Dashboard = () => {
+const Dashboard = ({loggedInUser}) => {
   return (
-    <div>Dashboard</div>
+    <>
+      {loggedInUser ? (<h1>Welcome, {loggedInUser.Username}!</h1>): ''}
+      <TransactionsView />
+      <SummaryView  />
+    </>
   )
 }
 

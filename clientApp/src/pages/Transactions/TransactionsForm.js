@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { TextField, MenuItem, FormControl, InputLabel, Select, Grid } from "@mui/material";
-import { ToastContainer, toast } from "react-toastify";
+import { TextField, MenuItem, Grid } from "@mui/material";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const TransactionsForm = () => {
@@ -122,9 +122,9 @@ const TransactionsForm = () => {
                             error={!!errors.category}
                             helperText={errors.category?.message}
                         >
-                            {categories.map((c) => (
-                                <MenuItem key={c.CategoryId} value={c.CategoryId}>
-                                    {c.Name}
+                            {categories.map((option) => (
+                                <MenuItem key={option.CategoryId} value={option.Name}>
+                                    {option.Name}
                                 </MenuItem>
                             ))}
                         </TextField>
@@ -132,8 +132,6 @@ const TransactionsForm = () => {
                         <input type="submit" value="Add Transaction" />
                     </Grid>
                 </form>
-
-                <ToastContainer position="top-center" autoClose={2000} />
             </div>
         </div>
     );

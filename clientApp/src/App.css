@@ -119,3 +119,71 @@ button[type="submit"]:hover {
   font-size: 13px;
   margin-top: 4px;
 }
+
+.transactions-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.transactions-table th,
+.transactions-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+}
+
+.transactions-table th {
+  background-color: #f5f5f5;
+  font-weight: 600;
+}
+
+.summary-card {
+  padding: 2rem;
+  max-width: 400px;
+  margin: 1.5rem auto;
+  border-radius: var(--border-radius);
+  background: var(--card-bg);
+  backdrop-filter: var(--blur);
+  box-shadow: var(--shadow);
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  color: var(--text-color);
+  transition: var(--transition);
+}
+
+.summary-card h2 {
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.summary-card p {
+  margin: 0.5rem 0;
+  font-size: 1.2rem;
+}
+
+.summary-card p strong {
+  display: inline-block;
+  width: 120px;
+  text-align: left;
+}
+
+.summary-card .total-income {
+  color: #4caf50; /* green */
+  font-weight: 500;
+}
+
+.summary-card .total-expenses {
+  color: #f44336; /* red */
+  font-weight: 500;
+}
+
+.summary-card .net-balance {
+  color: #2196f3; /* blue */
+  font-weight: 600;
+  font-size: 1.4rem;
+  margin-top: 1rem;
+}
+
