@@ -13,7 +13,7 @@ function App() {
             {!hideHeader && <Header />}
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/add-transaction" element={<TransactionsForm />} />
+        <Route path="/addTransaction" element={<TransactionsForm />} />
         <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
         </>

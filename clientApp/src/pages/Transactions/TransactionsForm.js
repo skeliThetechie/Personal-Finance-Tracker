@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { TextField, MenuItem, FormControl, InputLabel, Select, Grid } from "@mui/material";
 import { ToastContainer, toast } from "react-toastify";
@@ -10,44 +10,70 @@ const TransactionsForm = () => {
         handleSubmit,
         reset,
         formState: { errors },
-    } = useForm();
+    } = useForm({
+    defaultValues: {
+      amount: "",
+      date: "",
+      description: "",
+      category: "",
+    },
+  });
+    const [categories, setCategories] = useState([]);
 
-    const categories = [
-        {
-            value: "Food & Dining",
-            label: "Food & Dining",
-        },
-        {
-            value: "Transportation",
-            label: "Transportation",
-        },
-        {
-            value: "Shopping",
-            label: "Shopping",
-        },
-        {
-            value: "Bills & Utilities",
-            label: "Bills & Utilities",
-        },
-        {
-            value: "Entertainment",
-            label: "Entertainment",
-        },
-        {
-            value: "Income",
-            label: "Income",
-        },
-        {
-            value: "Other",
-            label: "Other",
-        },
-    ];
+    // Fetch categories from backend
+    useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                const response = await fetch("http://localhost:3000/api/categories");
 
-    const onSubmit = (data) => {
-        console.log("Transaction Added:", data);
-        toast.success("Transaction added successfully!");
-        reset();
-      //  window.location.reload();
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch categories (${response.status})`);
+                }
+
+                const data = await response.json();
+                setCategories(data);
+            } catch (error) {
+                console.error("Error loading categories:", error);
+                toast.error("Unable to load categories. Please try again later.");
+            }
+        };
+
+        fetchCategories();
+    }, []);
+
+    const onSubmit = async (data) => {
+        try {
+            const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+            if (!loggedInUser) {
+                toast.error("Please log in first!");
+                return;
+            }
+
+            const response = await fetch("http://localhost:3000/api/transactions/add", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    userId: loggedInUser.UserId,
+                    description: data.description?.trim() || null,
+                    amount: parseFloat(data.amount),
+                    category: data.category,
+                    date: data.date,
+                }),
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                console.log("Transaction Added:", data);
+                toast.success("Transaction added successfully!");
+                reset();
+            } else {
+                toast.error(result.error || "Failed to add transaction");
+            }
+        } catch (error) {
+            toast.error("Error connecting to server");
+            console.log('Error message', error);
+        }
     };
 
     return (
@@ -96,9 +122,9 @@ const TransactionsForm = () => {
                             error={!!errors.category}
                             helperText={errors.category?.message}
                         >
-                            {categories.map((option) => (
-                                <MenuItem key={option.value} value={option.value}>
-                                    {option.label}
+                            {categories.map((c) => (
+                                <MenuItem key={c.CategoryId} value={c.CategoryId}>
+                                    {c.Name}
                                 </MenuItem>
                             ))}
                         </TextField>

@@ -24,7 +24,7 @@ function Header() {
           indicatorColor="primary"
         >
           <Tab label="Dashboard" value="/dashboard" component={Link} to="/dashboard" />
-          <Tab label="Add Transaction" value="/add-transaction" component={Link} to="/add-transaction" />
+          <Tab label="Add Transaction" value="/addTransaction" component={Link} to="/addTransaction" />
           <Tab label="Logout" value="/" component={Link} to="/" />
         </Tabs>
       </Toolbar>
