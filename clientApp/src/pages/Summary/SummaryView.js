@@ -8,8 +8,6 @@ const SummaryView = () => {
     netBalance: 0,
   });
 
-  
-
   useEffect(() => {
     const fetchSummary = async () => {
       const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
@@ -28,26 +26,25 @@ const SummaryView = () => {
   }, []);
 
   return (
-  <div className="login-card">
-    <h2 className="App-title">Summary</h2>
-    <div className="summary-stats">
-      <div className="summary-item">
-        <span className="summary-label">Total Income:</span>
-        <span className="summary-value income">${summary.totalIncome.toFixed(2)}</span>
+    <div className="login-card">
+      <h2 className="App-title">Summary</h2>
+      <div className="summary-stats">
+        <div className="summary-item">
+          <span className="summary-label">Total Income:</span>
+          <span className="summary-value income">${summary.totalIncome.toFixed(2)}</span>
+        </div>
+        <div className="summary-item">
+          <span className="summary-label">Total Expenses:</span>
+          <span className="summary-value expenses">${summary.totalExpenses.toFixed(2)}</span>
+        </div>
+        <div className="summary-item">
+          <span className="summary-label">Net Balance:</span>
+          <span className="summary-value balance">${summary.netBalance.toFixed(2)}</span>
+        </div>
+        
       </div>
-      <div className="summary-item">
-        <span className="summary-label">Total Expenses:</span>
-        <span className="summary-value expenses">${summary.totalExpenses.toFixed(2)}</span>
-      </div>
-      <div className="summary-item">
-        <span className="summary-label">Net Balance:</span>
-        <span className="summary-value balance">${summary.netBalance.toFixed(2)}</span>
-      </div>
-      
     </div>
-  </div>
-);
-
+  );
 };
 
 export default SummaryView;

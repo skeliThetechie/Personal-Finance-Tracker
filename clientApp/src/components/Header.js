@@ -7,13 +7,12 @@ function Header() {
   const location = useLocation();
   const navigate = useNavigate();
   const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
-
+  //functionality for logout button
     const handleLogout = () => {
     localStorage.removeItem("loggedInUser"); // Clear saved user
     toast.info("Logging out...");
     navigate("/"); // Redirect to login page
   };
-
 
   return (
       <>

@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 
 const TransactionsView = () => {
   const [transactions, setTransactions] = useState([]);
-
+  
   useEffect(() => {
     const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
     if (!loggedInUser) {
@@ -41,8 +41,7 @@ const TransactionsView = () => {
         <h2 className="App-title">Your Transactions</h2>
 
         {transactions.length === 0 ? (
-          <><p>No expenses to display. Please add some transactions!</p></>
-          
+            <p>No expenses to display. Please add some transactions!</p>
         ) : (
         <div className="transactions-table-container">
           <table className="transactions-table">

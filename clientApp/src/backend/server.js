@@ -14,12 +14,15 @@ const dbPromise = open({
 });
 
 // ROUTES
+
+//Get all users
 app.get("/api/users", async (req, res) => {
   const db = await dbPromise;
   const users = await db.all("SELECT * FROM Users");
   res.json(users);
 });
 
+//Get all categories
 app.get("/api/categories", async (req, res) => {
   const db = await dbPromise;
   const categories = await db.all("SELECT * FROM Categories");

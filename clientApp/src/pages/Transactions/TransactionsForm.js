@@ -18,11 +18,9 @@ const TransactionsForm = () => {
         const fetchCategories = async () => {
             try {
                 const response = await fetch("http://localhost:5000/api/categories");
-
                 if (!response.ok) {
                     throw new Error(`Failed to fetch categories (${response.status})`);
                 }
-
                 const data = await response.json();
                 setCategories(data);
             } catch (error) {
@@ -30,7 +28,6 @@ const TransactionsForm = () => {
                 toast.error("Unable to load categories. Please try again later.");
             }
         };
-
         fetchCategories();
     }, []);
 
@@ -53,9 +50,7 @@ const TransactionsForm = () => {
                     date: data.date,
                 }),
             });
-
             const result = await response.json();
-
             if (response.ok) {
                 console.log("Transaction Added:", data);
                 toast.success("Transaction added successfully!");
@@ -74,7 +69,6 @@ const TransactionsForm = () => {
         <div className="App">
             <div className="login-card">
                 <h2 className="App-title">Add Transaction</h2>
-
                 <form onSubmit={handleSubmit(onSubmit)} className="transaction-form">
                     <Grid container spacing={1}>
                         <TextField
@@ -121,7 +115,6 @@ const TransactionsForm = () => {
                                 </MenuItem>
                             ))}
                         </TextField>
-
                         <input type="submit" value="Add Transaction" />
                     </Grid>
                 </form>
