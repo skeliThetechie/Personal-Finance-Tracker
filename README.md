@@ -37,3 +37,6 @@ Frontend: React.js, React Router, Toastify
 Backend: Node.js, Express
 Database: SQLite
 Styling: CSS
+
+🧰 Notes
+If ports 3000 or 5000 are busy on your machine, you can change them inside the React app or server.js file as needed.
