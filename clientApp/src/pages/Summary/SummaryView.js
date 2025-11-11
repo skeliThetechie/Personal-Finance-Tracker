@@ -13,7 +13,7 @@ const SummaryView = () => {
   useEffect(() => {
     const fetchSummary = async () => {
       const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
-
+      //Fetch summarries of transactions by userId from the backend
       try {
         const res = await fetch(`http://localhost:5000/api/transactions/summary/${loggedInUser.UserId}`);
         if (!res.ok) throw new Error("Failed to fetch summary");
@@ -43,6 +43,7 @@ const SummaryView = () => {
         <span className="summary-label">Net Balance:</span>
         <span className="summary-value balance">${summary.netBalance.toFixed(2)}</span>
       </div>
+      
     </div>
   </div>
 );

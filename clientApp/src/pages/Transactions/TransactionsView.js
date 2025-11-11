@@ -41,7 +41,7 @@ const TransactionsView = () => {
         <h2 className="App-title">Your Transactions</h2>
 
         {transactions.length === 0 ? (
-          <><p>No transactions found. </p><p>Please add a Transaction!</p></>
+          <><p>No expenses to display. Please add some transactions!</p></>
           
         ) : (
         <div className="transactions-table-container">

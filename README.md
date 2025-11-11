@@ -21,9 +21,13 @@ The frontend fetches data from the backend server running on port 5000.
 Make sure the backend is running before starting the React app.
 
 🧠 Features
--User login system (Please login using one of the following accounts below:)
-Username: demoUser1 Password: password123
-Username: demoUser2 Password: mypassword
+-User login system (Please login using one of the following accounts below)
+Username: demoUser1 
+Password: password123  
+(The demoUser1 account has no data added and this can be used to add data off your choice and test out the functionalities of the application)
+Username: admin 
+Password: admin123  
+(The admin account already has data in it to view)
 -Add, view, and delete transactions
 -Transaction summary (Total Income, Total Expenses, Net Balance)
 -Dashboard with charts and summaries

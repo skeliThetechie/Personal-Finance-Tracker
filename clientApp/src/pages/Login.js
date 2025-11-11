@@ -1,12 +1,15 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { TextField, Grid } from "@mui/material";
+import { TextField, Grid, IconButton, InputAdornment } from "@mui/material";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 const Login = () => {
     const navigate = useNavigate();
+    const [showPassword, setShowPassword] = React.useState(false);
 
     const {
         register,
@@ -14,6 +17,16 @@ const Login = () => {
         watch,
         formState: { errors },
     } = useForm();
+
+    const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+    };
+
+    const handleMouseUpPassword = (event) => {
+        event.preventDefault();
+    };
 
     const username = watch("username")?.trim();
     const password = watch("password")?.trim();
@@ -75,7 +88,7 @@ const Login = () => {
                                 {...register("password")}
                                 id="outlined-password-input"
                                 label="Password"
-                                type="password"
+                                type={showPassword ? 'text' : 'password'}
                                 autoComplete="current-password"
                                 {...register("password", {
                                     required: "Password is required",
@@ -83,6 +96,21 @@ const Login = () => {
                                 })}
                                 error={!!errors.password}
                                 helperText={errors.password?.message}
+                                endAdornment={
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                        aria-label={
+                                            showPassword ? 'hide the password' : 'display the password'
+                                        }
+                                        onClick={handleClickShowPassword}
+                                        onMouseDown={handleMouseDownPassword}
+                                        onMouseUp={handleMouseUpPassword}
+                                        edge="end"
+                                        >
+                                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                                        </IconButton>
+                                    </InputAdornment>
+                                }
                             />
                         </Grid>
                         <Grid size={{ xs: 6 }} />
