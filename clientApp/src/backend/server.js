@@ -75,6 +75,24 @@ app.post("/api/transactions/add", async (req, res) => {
   }
 });
 
+// Delete a transaction
+app.delete("/api/transactions/:id", async (req, res) => {
+  const db = await dbPromise;
+  const { id } = req.params;
+
+  try {
+    const result = await db.run("DELETE FROM Transactions WHERE TransactionId = ?", [id]);
+    if (result.changes === 0) {
+      return res.status(404).json({ error: "Transaction not found" });
+    }
+    res.json({ message: "Transaction deleted successfully" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to delete transaction" });
+  }
+});
+
+
 // Get summary for a specific user
 app.get("/api/transactions/summary/:userId", async (req, res) => {
   const db = await dbPromise;
@@ -111,5 +129,5 @@ app.get("/", (req, res) => {
 });
 
 // Start server
-const PORT = 3000;
+const PORT = 5000;
 app.listen(PORT, () => console.log(`✅ Server running on http://localhost:${PORT}`));

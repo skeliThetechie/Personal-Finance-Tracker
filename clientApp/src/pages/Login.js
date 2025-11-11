@@ -22,7 +22,7 @@ const Login = () => {
 
     const onSubmit = async (username, password) => {
         try {
-            const response = await fetch("http://localhost:3000/api/users");
+            const response = await fetch("http://localhost:5000/api/users");
 
             if (!response.ok) {
                 throw new Error(`Server error: ${response.status}`);

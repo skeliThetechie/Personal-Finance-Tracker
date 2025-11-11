@@ -20,11 +20,11 @@ const TransactionsForm = () => {
   });
     const [categories, setCategories] = useState([]);
 
-    // Fetch categories from backend
+    // Fetch categories from the backend
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const response = await fetch("http://localhost:3000/api/categories");
+                const response = await fetch("http://localhost:5000/api/categories");
 
                 if (!response.ok) {
                     throw new Error(`Failed to fetch categories (${response.status})`);
@@ -48,8 +48,8 @@ const TransactionsForm = () => {
                 toast.error("Please log in first!");
                 return;
             }
-
-            const response = await fetch("http://localhost:3000/api/transactions/add", {
+            //Adds transactions to the backend
+            const response = await fetch("http://localhost:5000/api/transactions/add", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
