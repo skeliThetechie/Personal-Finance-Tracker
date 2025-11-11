@@ -10,14 +10,7 @@ const TransactionsForm = () => {
         handleSubmit,
         reset,
         formState: { errors },
-    } = useForm({
-    defaultValues: {
-      amount: "",
-      date: "",
-      description: "",
-      category: "",
-    },
-  });
+    } = useForm();
     const [categories, setCategories] = useState([]);
 
     // Fetch categories from the backend
@@ -67,6 +60,7 @@ const TransactionsForm = () => {
                 console.log("Transaction Added:", data);
                 toast.success("Transaction added successfully!");
                 reset();
+                window.location.reload();
             } else {
                 toast.error(result.error || "Failed to add transaction");
             }
@@ -117,7 +111,6 @@ const TransactionsForm = () => {
                             select
                             label="Category"
                             required
-                            defaultValue=""
                             {...register("category", { required: "Category is required" })}
                             error={!!errors.category}
                             helperText={errors.category?.message}

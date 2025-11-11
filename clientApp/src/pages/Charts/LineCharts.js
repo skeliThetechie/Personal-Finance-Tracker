@@ -12,7 +12,7 @@ const LineCharts = () => {
       toast.error("Please log in first!");
       return;
     }
-
+    // Fetch transaction by userId from the backend
     fetch(`http://localhost:5000/api/transactions/user/${loggedInUser.UserId}`)
       .then((res) => res.json())
       .then((data) => {

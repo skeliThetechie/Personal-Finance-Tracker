@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { TextField, Grid, IconButton, InputAdornment } from "@mui/material";
+import { TextField, Grid, IconButton, InputAdornment, FormControl, InputLabel, OutlinedInput } from "@mui/material";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
@@ -84,33 +84,32 @@ const Login = () => {
                         <Grid size={{ xs: 12 }}>
                             <TextField
                                 name="password"
-                                required
-                                {...register("password")}
-                                id="outlined-password-input"
                                 label="Password"
-                                type={showPassword ? 'text' : 'password'}
+                                type={showPassword ? "text" : "password"}
+                                required
+                                fullWidth
                                 autoComplete="current-password"
                                 {...register("password", {
-                                    required: "Password is required",
-                                    validate: (value) => value.trim() !== "" || "Password cannot be just spaces",
+                                required: "Password is required",
+                                validate: (value) => value.trim() !== "" || "Password cannot be just spaces",
                                 })}
                                 error={!!errors.password}
                                 helperText={errors.password?.message}
-                                endAdornment={
+                                InputProps={{
+                                endAdornment: (
                                     <InputAdornment position="end">
-                                        <IconButton
-                                        aria-label={
-                                            showPassword ? 'hide the password' : 'display the password'
-                                        }
+                                    <IconButton
+                                        aria-label={showPassword ? "hide password" : "show password"}
                                         onClick={handleClickShowPassword}
                                         onMouseDown={handleMouseDownPassword}
                                         onMouseUp={handleMouseUpPassword}
                                         edge="end"
-                                        >
+                                    >
                                         {showPassword ? <VisibilityOff /> : <Visibility />}
-                                        </IconButton>
+                                    </IconButton>
                                     </InputAdornment>
-                                }
+                                ),
+                                }}
                             />
                         </Grid>
                         <Grid size={{ xs: 6 }} />
